@@ -9,14 +9,12 @@ const Navbar = () => {
         <nav className="bg-primary shadow-md">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
-                    {/* Logo */}
                     <div className="flex-shrink-0">
                         <Link to="/">
                             <img src={logo} alt="Recipe Logo" className="h-10 w-auto" />
                         </Link>
                     </div>
 
-                    {/* Desktop Nav */}
                     <div className="hidden md:flex md:items-center space-x-6">
                         <Link to="/" className="text-[--color-accent] hover:text-[--color-primary] font-medium">Home</Link>
                         <Link to="/all" className="text-[--color-accent] hover:text-[--color-primary] font-medium">All Recipes</Link>
@@ -26,7 +24,6 @@ const Navbar = () => {
                         <Link to="/auth/signup" className="ml-2 bg-[--color-primary] text-white px-4 py-2 rounded hover:bg-opacity-80 transition">Sign Up</Link>
                     </div>
 
-                    {/* Mobile Menu Button */}
                     <div className="md:hidden">
                         <button onClick={() => setIsOpen(!isOpen)} className="text-[--color-accent] focus:outline-none">
                             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,7 +38,6 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Mobile Nav */}
             {isOpen && (
                 <div className="md:hidden bg-[--color-base-100] px-4 pb-4 space-y-2">
                     <Link to="/" className="block text-[--color-accent] hover:text-[--color-primary]">Home</Link>

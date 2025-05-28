@@ -11,64 +11,72 @@ import MyRecipe from "../Pages/MyRecipe";
 import Loading from "../Components/Loading";
 import RecipeDetails from "../Pages/RecipeDetails";
 import UpdateRecipe from "../Pages/UpdateRecipe";
+import PrivateRoute from "../Provider/PrivateRoute";
 
- export const router = createBrowserRouter([
+export const router = createBrowserRouter([
     {
-        path:'/',
-        element:<MainLayout></MainLayout>,
-        children:[
+        path: '/',
+        element: <MainLayout></MainLayout>,
+        children: [
             {
-                path:'/',
-                element:<Home></Home>
+                path: '/',
+                element: <Home></Home>
             },
             {
-                path:'/all',
-                element:<AllRecipes></AllRecipes>,
-                loader:()=> fetch(`http://localhost:5000/recipes`),
-                hydrateFallbackElement:<Loading></Loading>           
+                path: '/all',
+                element: <AllRecipes></AllRecipes>,
+                loader: () => fetch(`http://localhost:5000/recipes`),
+                hydrateFallbackElement: <Loading></Loading>
             },
             {
-                path:'/add',
-                element:<AddRecipes></AddRecipes>
+                path: '/add',
+                element: <PrivateRoute>
+                    <AddRecipes></AddRecipes>
+
+                </PrivateRoute>
             },
             {
-                path:'/myrecipe',
-                element:<MyRecipe></MyRecipe>,
-                loader:()=> fetch(`http://localhost:5000/recipes/`)
+                path: '/myrecipe',
+                element: <PrivateRoute>
+                    <MyRecipe></MyRecipe>
+                </PrivateRoute>,
+                loader: () => fetch(`http://localhost:5000/recipes/`)
             },
             {
-                path:'/details/:id',
-                element:<RecipeDetails></RecipeDetails>,
-                loader:({params}) =>fetch(`http://localhost:5000/recipes/${params.id}`),
-                hydrateFallbackElement:<Loading></Loading>  
-                        
+                path: '/details/:id',
+                element: <PrivateRoute>
+                    <RecipeDetails></RecipeDetails>
+                </PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/recipes/${params.id}`),
+                hydrateFallbackElement: <Loading></Loading>
+
 
             },
             {
-                path:'/update/:id',
-                element:<UpdateRecipe></UpdateRecipe>,
-                loader:({params}) =>fetch(`http://localhost:5000/recipes/${params.id}`),
-                hydrateFallbackElement:<Loading></Loading>  
+                path: '/update/:id',
+                element: <UpdateRecipe></UpdateRecipe>,
+                loader: ({ params }) => fetch(`http://localhost:5000/recipes/${params.id}`),
+                hydrateFallbackElement: <Loading></Loading>
 
             },
-            
+
             {
-                path:'/auth',
-                element:<AuthLayout></AuthLayout>,
-                children:[
+                path: '/auth',
+                element: <AuthLayout></AuthLayout>,
+                children: [
                     {
-                        path:'/auth/login',
-                        element:<LogIn></LogIn>
+                        path: '/auth/login',
+                        element: <LogIn></LogIn>
                     },
                     {
-                        path:'/auth/signup',
-                        element:<SignUp></SignUp>
+                        path: '/auth/signup',
+                        element: <SignUp></SignUp>
                     }
                 ]
             },
             {
-                path:'/*',
-                element:<Error></Error>
+                path: '/*',
+                element: <Error></Error>
             }
         ]
     }
