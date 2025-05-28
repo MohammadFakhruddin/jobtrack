@@ -1,4 +1,3 @@
-import React from "react";
 import { toast } from "react-toastify";
 
 const handleAddRecipe = (e) =>{
@@ -8,7 +7,7 @@ const handleAddRecipe = (e) =>{
   const recipeData = Object.fromEntries(formData.entries())
   console.log(recipeData);
 
-  fetch('http://localhost:5000/recipes', {
+  fetch('http://localhost:5000/recipes  ', {
     method:'POST',
     headers:{
         'content-type' : 'application/json'

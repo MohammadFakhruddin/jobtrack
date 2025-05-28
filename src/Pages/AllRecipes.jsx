@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useLoaderData } from 'react-router'; 
 import { HiOutlineArrowRight } from 'react-icons/hi';
 

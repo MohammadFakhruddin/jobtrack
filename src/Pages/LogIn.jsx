@@ -1,87 +1,71 @@
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
+import GoogleSignIn from '../Provider/GoogleSignIn';
+import ShowHidePassword from '../Components/ShowHidePassword';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
-import GoogleSignIn from '../Components/GoogleSignIn';
-import PassWordHide from '../Components/PassWordHide'; 
+
 
 const LogIn = () => {
-    const { signInUser, setUser } = useContext(AuthContext);
-    const [error, setError] = useState('');
-    const navigate = useNavigate();
+    const [error, setError] = useState('')
+
+
+    const { signIn } = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
 
     const handleLogIn = (e) => {
         e.preventDefault();
 
-        const email = e.target.email.value;
-        const password = e.target.password.value;
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value
 
-        if (!email || !password) {
-            setError("Please fill in all fields.");
-            return;
-        }
+        signIn(email, password)
+            .then((result) => {
+                const user = result.user
+                console.log(user);
+                toast.success('Login Successfull!!')
 
-        setError('');
-
-        signInUser(email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                setUser(user);
-                toast.success('Login successful');
-                navigate('/');
+                navigate(`${location.state ? location.state : '/'}`)
             })
-            .catch((err) => {
-                console.error(err);
-                setError(err.message || 'Login failed');
-                toast.error(err.message || 'Login failed');
-            });
-    };
+            .catch((error) => {
+                const errorCode = error.code;
+
+                setError(errorCode)
+            })
+    }
+
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-[--color-base-100] px-4">
-            <div className="card w-full max-w-sm bg-white shadow-xl">
-                <div className="card-body">
-                    <h2 className="text-3xl font-bold text-center text-[--color-primary]">Login</h2>
-                    <form onSubmit={handleLogIn} className="space-y-4 mt-4">
-                        <div>
-                            <label className="block text-[--color-accent] mb-1">Email</label>
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Enter your email"
-                                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[--color-primary]"
-                                required
-                            />
-                        </div>
+        <div>
 
-                        <div>
-                            <label className="block text-[--color-accent] mb-1">Password</label>
-                            <PassWordHide />
-                        </div>
 
-                        {error && <p className="text-red-600 text-sm">{error}</p>}
+            <div className="card bg-white w-full mx-auto my-20 max-w-sm shrink-0 shadow-2xl">
+                <form onSubmit={handleLogIn} className="card-body">
+                    <h1 className="text-3xl text-center text-accent font-bold">Login now!</h1>
+                    <fieldset className="fieldset">
 
-                        <button type="submit" className="w-full bg-[--color-primary] text-white py-2 rounded hover:bg-opacity-90 transition">
-                            Login
-                        </button>
-                    </form>
+                        <label className="label">Email</label>
+                        <input type="email" name='email' className="input" placeholder="Email" required />
 
-                    <div className="mt-4 text-center text-sm text-[--color-accent] font-semibold">OR</div>
+                        <ShowHidePassword></ShowHidePassword>
 
-                    <div className="mt-4">
-                        <GoogleSignIn />
-                    </div>
+            {error && <p className='text-red-600'>{error}</p>}
 
-                    <p className="mt-6 text-center text-[--color-accent]">
-                        Don't have an account?{' '}
-                        <Link to="/auth/signup" className="text-[--color-primary] font-semibold hover:underline">
-                            Sign Up
-                        </Link>
-                    </p>
-                </div>
+
+                        <button type='submit' className="btn btn-primary hover:btn-secondary mt-4">Log In</button>
+
+                        <p className='text-center font-bold my-2 text-primary'>OR</p>
+
+                        <GoogleSignIn></GoogleSignIn>
+                        <p className='mt-3'>Don't have an account? <Link className='text-primary font-semibold hover:text-secondary' to={'/auth/signup'}>Sign Up</Link></p>
+                    </fieldset>
+                </form>
             </div>
+
         </div>
     );
 };
 
-export default LogIn;
+export default LogIn

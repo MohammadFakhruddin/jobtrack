@@ -21,7 +21,7 @@ const Navbar = () => {
                         <Link to="/" className="text-[--color-accent] hover:text-[--color-primary] font-medium">Home</Link>
                         <Link to="/all" className="text-[--color-accent] hover:text-[--color-primary] font-medium">All Recipes</Link>
                         <Link to="/add" className="text-[--color-accent] hover:text-[--color-primary] font-medium">Add Recipe</Link>
-                        <Link to="/myrecipes" className="text-[--color-accent] hover:text-[--color-primary] font-medium">My Recipes</Link>
+                        <Link to="/myrecipe" className="text-[--color-accent] hover:text-[--color-primary] font-medium">My Recipes</Link>
                         <Link to='/auth/login' className="ml-4 text-[--color-primary] font-semibold hover:underline">Log In</Link>
                         <Link to="/auth/signup" className="ml-2 bg-[--color-primary] text-white px-4 py-2 rounded hover:bg-opacity-80 transition">Sign Up</Link>
                     </div>
