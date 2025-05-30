@@ -1,33 +1,44 @@
-import { Link, useLoaderData } from 'react-router'; 
+import { Link, useLoaderData } from 'react-router';
 import { HiOutlineArrowRight } from 'react-icons/hi';
 
 const AllRecipes = () => {
   const recipes = useLoaderData();
-  console.log(recipes);
-
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold text-center text-primary mb-10">All Recipes</h2>
+      <h2 className="text-3xl font-bold text-center text-[#FF725E] mb-10">
+        All Recipes
+      </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {recipes?.map((recipe) => (
-          <div key={recipe._id} className="card bg-base-100 shadow-md rounded-xl overflow-hidden hover:shadow-xl transition">
-            <figure>
-              <img src={recipe.image} alt={recipe.title} className="h-48 w-full object-cover" />
-            </figure>
-            <div className="card-body">
-              <h3 className="text-xl font-semibold text-accent">{recipe.title}</h3>
-              <p className="text-sm text-gray-500">Cuisine: <span className="text-neutral">{recipe.cuisineType}</span></p>
+          <div
+            key={recipe._id}
+            className="bg-[#FFF8F5] dark:bg-[#1A1A1A] border border-[#FFD19C] rounded-lg shadow-md overflow-hidden transition hover:shadow-lg"
+          >
+            <img
+              src={recipe.image}
+              alt={recipe.title}
+              className="h-48 w-full object-cover"
+            />
+            <div className="p-5">
+              <h3 className="text-xl font-bold text-[#FF725E] mb-2">{recipe.title}</h3>
+              <p className="text-sm text-gray-700 dark:text-gray-200">
+                <span className="font-semibold text-[#FF725E]">Cuisine:</span> {recipe.cuisineType}
+              </p>
 
-              <div className="flex flex-wrap gap-2 mt-2">
-                  <span className="badge badge-outline badge-primary text-xs px-3 py-1">{recipe.categories}</span>
-                
+              <div className="mt-2">
+                <span className="inline-block text-xs font-medium bg-[#FFD19C] text-[#5c3b1e] px-3 py-1 rounded-full">
+                  {recipe.categories}
+                </span>
               </div>
 
-              <div className="mt-4">
-                <Link to={`/details/${recipe._id}`} className="btn btn-sm btn-outline btn-primary w-full flex justify-between items-center">
-                  See Details <HiOutlineArrowRight className="text-lg" />
+              <div className="mt-5">
+                <Link
+                  to={`/details/${recipe._id}`}
+                  className="block text-center bg-[#FF725E] text-white px-4 py-2 rounded hover:bg-opacity-90 transition"
+                >
+                  See Details <HiOutlineArrowRight className="inline-block ml-1 text-lg" />
                 </Link>
               </div>
             </div>
@@ -39,4 +50,3 @@ const AllRecipes = () => {
 };
 
 export default AllRecipes;
-

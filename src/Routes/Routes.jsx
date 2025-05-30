@@ -62,8 +62,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/blogs/:id',
-                element: <PrivateRoute>
-                    <BlogDetail></BlogDetail> </PrivateRoute>,
+                element: 
+                    <BlogDetail></BlogDetail> ,
                 loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`),
                 hydrateFallbackElement: <Loading></Loading>
 

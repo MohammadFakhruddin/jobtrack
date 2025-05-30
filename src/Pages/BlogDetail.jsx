@@ -41,7 +41,7 @@ const BlogDetail = () => {
 
           <div className="mt-10">
             <Link
-              to="/blogs"
+              to="/"
               className="inline-block bg-[#FF725E] text-white px-6 py-2 rounded hover:bg-opacity-90 transition"
             >
               ← Back to Blogs
