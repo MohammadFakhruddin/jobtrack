@@ -5,13 +5,18 @@ import { RouterProvider } from 'react-router'
 import { router } from './Routes/Routes'
 import AuthProvider from './Provider/AuthProvider'
 import { ToastContainer } from 'react-toastify'
+import ThemeProvider from './Provider/ThemeContext'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
 
-    <RouterProvider router={router}></RouterProvider>
-<ToastContainer></ToastContainer>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+
+        <RouterProvider router={router}></RouterProvider>
+        <ToastContainer></ToastContainer>
+      </AuthProvider>
+    </ThemeProvider>
+
   </StrictMode>,
 )
