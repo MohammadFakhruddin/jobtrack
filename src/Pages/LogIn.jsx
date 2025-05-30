@@ -5,67 +5,71 @@ import ShowHidePassword from '../Components/ShowHidePassword';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 
-
 const LogIn = () => {
-    const [error, setError] = useState('')
+  const [error, setError] = useState('');
+  const { signIn } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  const handleLogIn = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
-    const { signIn } = useContext(AuthContext)
-    const location = useLocation()
-    const navigate = useNavigate()
+    signIn(email, password)
+      .then((result) => {
+       console.log(result);
+        toast.success('Login Successful!');
+        navigate(location.state || '/');
+      })
+      .catch((error) => {
+        setError(error.code || 'Login failed');
+      });
+  };
 
-    const handleLogIn = (e) => {
-        e.preventDefault();
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-[#FFF8F5] px-4">
+      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-xl">
+        <h2 className="text-3xl font-bold text-center text-[#FF725E] mb-6">Login Now</h2>
 
-        const form = e.target;
-        const email = form.email.value;
-        const password = form.password.value
+        <form onSubmit={handleLogIn}>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input
+              type="email"
+              name="email"
+              required
+              className="w-full px-4 py-2 border border-[#FFD19C] rounded focus:outline-none focus:ring-2 focus:ring-[#FF725E]"
+              placeholder="Enter your email"
+            />
+          </div>
 
-        signIn(email, password)
-            .then((result) => {
-                const user = result.user
-                console.log(user);
-                toast.success('Login Successfull!!')
+          <ShowHidePassword />
 
-                navigate(`${location.state ? location.state : '/'}`)
-            })
-            .catch((error) => {
-                const errorCode = error.code;
+          {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
 
-                setError(errorCode)
-            })
-    }
+          <button
+            type="submit"
+            className="w-full bg-[#FF725E] text-white py-2 rounded mt-4 hover:bg-opacity-90 transition"
+          >
+            Log In
+          </button>
 
+          <div className="text-center my-4 text-sm font-semibold text-gray-600">OR</div>
 
-    return (
-        <div>
+          <GoogleSignIn />
 
-
-            <div className="card bg-white w-full mx-auto my-20 max-w-sm shrink-0 shadow-2xl">
-                <form onSubmit={handleLogIn} className="card-body">
-                    <h1 className="text-3xl text-center text-accent font-bold">Login now!</h1>
-                    <fieldset className="fieldset">
-
-                        <label className="label">Email</label>
-                        <input type="email" name='email' className="input" placeholder="Email" required />
-
-                        <ShowHidePassword></ShowHidePassword>
-
-            {error && <p className='text-red-600'>{error}</p>}
-
-
-                        <button type='submit' className="btn btn-primary hover:btn-secondary mt-4">Log In</button>
-
-                        <p className='text-center font-bold my-2 text-primary'>OR</p>
-
-                        <GoogleSignIn></GoogleSignIn>
-                        <p className='mt-3'>Don't have an account? <Link className='text-primary font-semibold hover:text-secondary' to={'/auth/signup'}>Sign Up</Link></p>
-                    </fieldset>
-                </form>
-            </div>
-
-        </div>
-    );
+          <p className="mt-4 text-sm text-center text-gray-600">
+            Don't have an account?{' '}
+            <Link to="/auth/signup" className="text-[#FF725E] font-semibold hover:underline">
+              Sign Up
+            </Link>
+          </p>
+        </form>
+      </div>
+    </div>
+  );
 };
 
-export default LogIn
+export default LogIn;
