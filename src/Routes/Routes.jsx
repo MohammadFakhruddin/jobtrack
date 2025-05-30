@@ -12,6 +12,7 @@ import Loading from "../Components/Loading";
 import RecipeDetails from "../Pages/RecipeDetails";
 import UpdateRecipe from "../Pages/UpdateRecipe";
 import PrivateRoute from "../Provider/PrivateRoute";
+import BlogDetail from "../Pages/BlogDetail";
 
 export const router = createBrowserRouter([
     {
@@ -57,6 +58,17 @@ export const router = createBrowserRouter([
                 element: <UpdateRecipe></UpdateRecipe>,
                 loader: ({ params }) => fetch(`http://localhost:5000/recipes/${params.id}`),
                 hydrateFallbackElement: <Loading></Loading>
+
+            },
+            {
+                path: '/blogs/:id',
+                element: <PrivateRoute>
+                    <BlogDetail></BlogDetail> </PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`),
+                hydrateFallbackElement: <Loading></Loading>
+
+
+
 
             },
 

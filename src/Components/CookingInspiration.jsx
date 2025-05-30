@@ -1,6 +1,7 @@
 import Lottie from 'lottie-react';
 import React from 'react';
 import cook from '../Cooking-lottie.json'
+import { Link } from 'react-router';
 
 const CookingInspiration = () => {
     return (
@@ -14,14 +15,14 @@ const CookingInspiration = () => {
                     <p className="text-[#555555] dark:text-gray-300 mb-6 leading-relaxed">
                         Discover easy-to-follow recipes, healthy meals, and sweet treats to satisfy every craving. Whether you're a beginner or a kitchen pro, our step-by-step guides bring joy to your table.
                     </p>
-                    <button className="bg-[#FF725E] hover:bg-[#e8604e] text-white font-semibold px-6 py-3 rounded-full transition shadow-md">
+                    <Link to={'/all'} className="bg-[#FF725E] hover:bg-[#e8604e] text-white font-semibold px-6 py-3 rounded-full transition shadow-md">
                         Explore Recipes
-                    </button>
+                    </Link>
                 </div>
 
                 <div className="w-full md:w-1/2 flex justify-center">
-                    <div className="w-64 h-64 bg-[#FFD19C] dark:bg-[#333333] rounded-xl flex items-center justify-center shadow-inner">
-                                            <Lottie animationData={cook}></Lottie>
+                    <div className="w-64 h-64 bg-[#FFD19C] dark:bg-[#333333] flex items-center justify-center shadow-inner">
+                                            <Lottie  animationData={cook}></Lottie>
 
                     </div>
                 </div>
