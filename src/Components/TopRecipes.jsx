@@ -6,7 +6,7 @@ const TopRecipes = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/topRecipes')
+    fetch('https://recipe-book-server-zeta.vercel.app/topRecipes')
       .then(res => res.json())
       .then(data => {
         setRecipes(data);

@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
             {
                 path: '/all',
                 element: <AllRecipes></AllRecipes>,
-                loader: () => fetch(`http://localhost:5000/recipes`),
+                loader: () => fetch(`https://recipe-book-server-zeta.vercel.app/recipes`),
                 hydrateFallbackElement: <Loading></Loading>
             },
             {
@@ -41,14 +41,14 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <MyRecipe></MyRecipe>
                 </PrivateRoute>,
-                loader: () => fetch(`http://localhost:5000/recipes/`)
+                loader: () => fetch(`https://recipe-book-server-zeta.vercel.app/recipes/`)
             },
             {
                 path: '/details/:id',
                 element: <PrivateRoute>
                     <RecipeDetails></RecipeDetails>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/recipes/${params.id}`),
+                loader: ({ params }) => fetch(`https://recipe-book-server-zeta.vercel.app/recipes/${params.id}`),
                 hydrateFallbackElement: <Loading></Loading>
 
 
@@ -56,7 +56,7 @@ export const router = createBrowserRouter([
             {
                 path: '/update/:id',
                 element: <UpdateRecipe></UpdateRecipe>,
-                loader: ({ params }) => fetch(`http://localhost:5000/recipes/${params.id}`),
+                loader: ({ params }) => fetch(`https://recipe-book-server-zeta.vercel.app/recipes/${params.id}`),
                 hydrateFallbackElement: <Loading></Loading>
 
             },
@@ -64,7 +64,7 @@ export const router = createBrowserRouter([
                 path: '/blogs/:id',
                 element: 
                     <BlogDetail></BlogDetail> ,
-                loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`),
+                loader: ({ params }) => fetch(`https://recipe-book-server-zeta.vercel.app/blogs/${params.id}`),
                 hydrateFallbackElement: <Loading></Loading>
 
 

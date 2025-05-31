@@ -9,7 +9,7 @@ const UpdateRecipe = ({ onClose, recipe, _id, onSubmit }) => {
     const formData = new FormData(e.target);
     const updatedRecipe = Object.fromEntries(formData.entries());
 
-    fetch(`http://localhost:5000/recipes/${_id}`, {
+    fetch(`https://recipe-book-server-zeta.vercel.app/recipes/${_id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

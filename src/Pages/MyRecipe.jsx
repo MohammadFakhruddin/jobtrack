@@ -19,7 +19,7 @@ const MyRecipe = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/recipes/${_id}`, {
+        fetch(`https://recipe-book-server-zeta.vercel.app/recipes/${_id}`, {
           method: 'DELETE'
         })
           .then(res => res.json())

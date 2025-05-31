@@ -6,7 +6,7 @@ const Blogs = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/blogs')
+    fetch('https://recipe-book-server-zeta.vercel.app/blogs')
       .then(res => res.json())
       .then(data => {
         setBlogs(data);

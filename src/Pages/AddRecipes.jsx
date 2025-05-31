@@ -7,7 +7,7 @@ const handleAddRecipe = (e) =>{
   const recipeData = Object.fromEntries(formData.entries())
   console.log(recipeData);
 
-  fetch('http://localhost:5000/recipes  ', {
+  fetch('https://recipe-book-server-zeta.vercel.app/recipes  ', {
     method:'POST',
     headers:{
         'content-type' : 'application/json'
